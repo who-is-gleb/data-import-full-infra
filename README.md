@@ -1,4 +1,4 @@
-# data-import-full-infra
+# Source code for the project
 This is a project for Altenar's interview exercise
 
 # Infrastructure schema is visualized here: 
