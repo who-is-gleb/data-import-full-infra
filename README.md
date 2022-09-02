@@ -2,4 +2,5 @@
 This is a project for Altenar's interview exercise
 
 # Infrastructure schema: 
-![Screen Shot 2022-09-02 at 11 33 37 PM](https://user-images.githubusercontent.com/49573287/188231729-ab0230f4-f54c-4617-b48a-7ac4e4d9dfa0.png)
+
+![Screen Shot 2022-09-02 at 11 50 01 PM](https://user-images.githubusercontent.com/49573287/188233434-19f14206-cc6b-4ddb-961c-2273b33035af.png)
