@@ -1,0 +1,2 @@
+apache-airflow==2.2.3
+gharchive==0.2.2
