@@ -2,3 +2,5 @@
 airflow/logs
 *.pyc
 logs/
+clickhousedb_data/
+clickhousedb_logs/
