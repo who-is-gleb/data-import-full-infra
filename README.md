@@ -22,14 +22,16 @@ _What was not fully achieved and why:_
 - I was not able to fully implement the "Environments" section. However, hypothetically, in order to do that I would need to configure various docker-compose files and environments. For example, for prod env I would need to configure security and authorization more strictly. Give proper authorization to CH instance. And so on.
 
 _Additional questions:_
-2. If the archive grows significantly, in order for us to evolve in terms of architecture, we would need to do the following (in the order of simplicity):
+
+Number 2. If the archive grows significantly, in order for us to evolve in terms of architecture, we would need to do the following (in the order of simplicity):
   - Use more generators then simple returns
   - Stop using XCom and start saving data to the filesystem directly, and share paths to data between tasks
   - Write a cleanup DAG for metadata database to save memory/disk space
   - Increase the number of and tune the Airflow workers (add more workers, reduce parallelism, increase timeouts, etc)
   - Deploy Airflow to Kubernetes as cluster to gain more computing power
   - Connect Airflow to EFS (for example) and use that as the filesystem to have more storage scalability for Airflow metadata/data
-3. I personally think the third question is about distributed systems topic. Basically, any distributed system should utilize high availability and have as minimal idle time as possible. That can be achieved by using an architecture that has 1 master node and multiple replicas. The process of leader election should be implemented as well. Leader becomes a master node that is responsible for processing requests, while the replicas serve as "computing" power. Whenever a leader fails, replicas should detect that quickly and elect a new leader. After that, the should syncronize and continue working with a new leader. I can discuss this question in more details if needed.
+  - 
+Number 3. I personally think the third question is about distributed systems topic. Basically, any distributed system should utilize high availability and have as minimal idle time as possible. That can be achieved by using an architecture that has 1 master node and multiple replicas. The process of leader election should be implemented as well. Leader becomes a master node that is responsible for processing requests, while the replicas serve as "computing" power. Whenever a leader fails, replicas should detect that quickly and elect a new leader. After that, the should syncronize and continue working with a new leader. I can discuss this question in more details if needed.
 
 # How to start everything up, run, fetch the archive and so on:
 
