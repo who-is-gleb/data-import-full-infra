@@ -20,6 +20,7 @@ _What was achieved successfully:_
 
 _What was not fully achieved and why:_
 - I was not able to fully implement the "Environments" section. However, hypothetically, in order to do that I would need to configure various docker-compose files and environments. For example, for prod env I would need to configure security and authorization more strictly. Give proper authorization to CH instance. And so on.
+- Testing. I did a very, very simple unit test, but surely it needs to be more proper with testing the dag loading, task flows and downstreams, etc. I had some troubles with libraries and modules for testing, that is why the project lacks proper testing now. But I keep that in mind and would have written proper tests if I had a little more time.
 
 _Additional questions:_
 
