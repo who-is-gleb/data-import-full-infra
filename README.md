@@ -4,7 +4,8 @@ This is a project for Altenar's interview exercise
 
 # Infrastructure schema: 
 
-![Screen Shot 2022-09-02 at 11 50 01 PM](https://user-images.githubusercontent.com/49573287/188233434-19f14206-cc6b-4ddb-961c-2273b33035af.png)
+![Screen Shot 2022-09-05 at 1 19 06 AM](https://user-images.githubusercontent.com/49573287/188335583-495f8749-a1e9-424f-b0d4-7bd9e9d34fd9.png)
+Done with Figma
 
 # Important notes from me:
 
