@@ -19,7 +19,7 @@ _What was achieved successfully:_
 - Daily fetching works properly.
 
 _What was not fully achieved and why:_
-- I was not able to fully implement the "Environments" section. If I had more time, I would have researched and implemented this part. In order to do that, I would need to configure various docker-compose files and environments. For example, for prod env I would need to configure security and authorization more strictly. Give proper authorization to CH instance. And so on.
+- I was not able to fully implement the "Environments" section. However, hypothetically, in order to do that I would need to configure various docker-compose files and environments. For example, for prod env I would need to configure security and authorization more strictly. Give proper authorization to CH instance. And so on.
 
 _Additional questions:_
 2. If the archive grows significantly, in order for us to evolve in terms of architecture, we would need to do the following (in the order of simplicity):
