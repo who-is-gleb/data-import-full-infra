@@ -58,7 +58,7 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- gharchive clickhouse_driver airflow-clickhouse-plugin}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- gharchive clickhouse_driver airflow-clickhouse-plugin clickhouse-sqlalchemy}
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -248,6 +248,13 @@ services:
     volumes:
       - ./clickhousedb_data:/var/lib/clickhouse
       - ./clickhousedb_logs:/var/log/clickhouse-server/
+
+  grafana-localhost:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana-storage:/var/lib/grafana
 
   airflow-cli:
     <<: *airflow-common

@@ -28,7 +28,6 @@ read it in other tasks using a given path to file.
 3) And, of course, scale Airflow (add more workers) and/or use clustered Airflow in Kubernetes
 """
 
-# path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 
 GITHUB_EVENT_TABLE_INFO = {
     'table_name': 'archive_events',
@@ -125,24 +124,63 @@ def main():
     gh = GHArchive()
     # data = gh.get('6/8/2020', '6/8/2020')
     # daily_events = data.to_dict_list()
-    test_result = [
+    test_data = [
         {"id": "1",
          "created_at": "2020-06-08T00:59:32+00:00",
-         "type": "a1",
+         "type": "CreateEvent",
          "actor": {"id": 123},
          "repo": {"id": 111111},
-         "payload": {"ref_type": None, "push_id": 7878},
+         "payload": {"ref_type": 'repository', "push_id": 7878},
          "commits": [1, 2, 3]},
         {"id": "2",
-         "created_at": "2020-06-08T00:59:32+00:00",
-         "type": "a2",
+         "created_at": "2020-06-07T01:59:32+00:00",
+         "type": "CreateEvent",
+         "actor": {"id": 123},
+         "repo": {"id": 222222},
+         "payload": {"ref_type": "repository", "push_id": 898989},
+         "commits": []},
+        {"id": "3",
+         "created_at": "2020-06-06T00:59:32+00:00",
+         "type": "CreateEvent",
+         "actor": {"id": 22},
+         "repo": {"id": 111111},
+         "payload": {"ref_type": 'repository', "push_id": 7878},
+         "commits": [1, 2]},
+        {"id": "4",
+         "created_at": "2020-06-05T00:59:32+00:00",
+         "type": "PushEvent",
          "actor": {"id": 456},
+         "repo": {"id": 222222},
+         "payload": {"ref_type": "branch", "push_id": 898989},
+         "commits": [1]},
+        {"id": "5",
+         "created_at": "2020-06-04T00:59:32+00:00",
+         "type": "PushEvent",
+         "actor": {"id": 456},
+         "repo": {"id": 111111},
+         "payload": {"ref_type": None, "push_id": 7878},
+         "commits": [1, 2, 3, 4, 5]},
+        {"id": "6",
+         "created_at": "2020-06-03T00:59:32+00:00",
+         "type": "PushEvent",
+         "actor": {"id": 22},
          "repo": {"id": 222222},
          "payload": {"ref_type": "branch", "push_id": 898989},
          "commits": []}
     ]
-    for event in test_result:
-        print(event)
+
+    transformed_list = [GithubEvent(github_event).to_dict() for github_event in test_data]
+    test_result = transformed_list[0] == {
+            "id": "1",
+            "created_at": "2020-06-08 00:59:32",
+            "type": "CreateEvent",
+            "actor_id": 123,
+            "repo_id": 111111,
+            "ref_type": 'repository',
+            "push_id": 7878,
+            "commit_amount": 3,
+        }
+    print(f"TEST RESULT: {test_result}")
 
 
 if __name__ == '__main__':

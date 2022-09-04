@@ -5,3 +5,4 @@ class Tag(str, Enum):
     github = 'github'
     daily = 'daily'
     with_catchup = 'with_catchup'
+    metrics = 'metrics'

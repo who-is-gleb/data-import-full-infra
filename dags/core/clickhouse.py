@@ -57,6 +57,7 @@ class ClickhouseLocalhost:
 
         logging.info(f'Final query:\n{query}')
         self.get_client().execute(query)
+        logging.info('Successfully created table')
 
     def insert_data(self, db_name: str, table_name: str, data: typing.List[typing.Dict], schema: typing.Dict):
         logging.info(f'About to insert data into {db_name}.{table_name}')
@@ -66,3 +67,15 @@ class ClickhouseLocalhost:
                 yield row
 
         self.get_client().execute(f"INSERT INTO {db_name}.{table_name} VALUES", generate_rows(), types_check=True)
+        logging.info('Successfully inserted data.')
+
+    def create_view(self, db_name: str, view_name: str, query: str):
+        logging.info(f'About to create view {db_name}.{view_name}')
+
+        ddl = textwrap.dedent(f"""
+        CREATE OR REPLACE VIEW {db_name}.{view_name} AS
+        {{query}}
+        """).format_map({'query': query}).strip()
+
+        self.get_client().execute(ddl)
+        logging.info('Successfully created view.')
