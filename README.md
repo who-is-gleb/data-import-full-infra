@@ -30,10 +30,14 @@ Number 2. If the archive grows significantly, in order for us to evolve in terms
   - Stop using XCom and start saving data to the filesystem directly, and share paths to data between tasks
   - Write a cleanup DAG for metadata database to save memory/disk space
   - Increase the number of and tune the Airflow workers (add more workers, reduce parallelism, increase timeouts, etc)
-  - Deploy Airflow to Kubernetes as cluster to gain more computing power
   - Connect Airflow to EFS (for example) and use that as the filesystem to have more storage scalability for Airflow metadata/data
+  - Deploy Airflow to Kubernetes as cluster to have multiple nodes to gain more computing power and high availability
 
-Number 3. I personally think the third question is about distributed systems topic. Basically, any distributed system should utilize high availability and have as minimal idle time as possible. That can be achieved by using an architecture that has 1 master node and multiple replicas. The process of leader election should be implemented as well. Leader becomes a master node that is responsible for processing requests, while the replicas serve as "computing" power. Whenever a leader fails, replicas should detect that quickly and elect a new leader. After that, the should syncronize and continue working with a new leader. I can discuss this question in more details if needed.
+Number 3. The third question refers to the distributed systems topic. Basically, any distributed system should utilize high availability and have as minimal idle time as possible. That can be achieved by using an architecture that has 1 master node and multiple replicas. The process of leader election should be implemented as well. Leader becomes a master node that is responsible for processing requests, while the replicas serve as "computing" power. Whenever a leader fails, replicas should detect that quickly and elect a new leader. After that, the should syncronize and continue working with a new leader. 
+_As for Airflow in particular_, scaling Airflow can have few options:
+First, increase the number of worker nodes. A cluster could have multiple worker nodes to have more computing resources.
+Second, increase the number of master nodes (web-server nodes). This can come in handy when there are a lot of requests that a web-server should process.
+There can only be one scheduler, though. As well as single metastore that all workers, servers and a scheduler would access.
 
 # How to start everything up, run, fetch the archive and so on:
 
