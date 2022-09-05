@@ -14,9 +14,9 @@ _What was achieved successfully:_
 - Clickhouse (CH) was configured as the data warehouse.
 - Grafana was used as a real-time dashboard.
 - They all work with each other successfully.
-- Point 2 is visualized in Grafana.
-- Other exercise points are delivered as views in CH.
 - Daily fetching works properly.
+- Point 2 is visualized in Grafana.
+- Other metrics are delivered as views in CH (4 views for all 4 metrics except number 4).
 - Metric 4 could not be calculated because the archive does not have any info about gender.
 
 _What was not fully achieved and why:_
