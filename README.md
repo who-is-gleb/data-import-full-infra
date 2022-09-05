@@ -9,7 +9,7 @@ Done with Figma
 
 # Important notes from me:
 
-_What was achieved successfully:_
+_What was achieved:_
 - Airflow was configured and used to extract data daily.
 - Clickhouse (CH) was configured as the data warehouse.
 - Grafana was used as a real-time dashboard.
@@ -18,10 +18,8 @@ _What was achieved successfully:_
 - Point 2 is visualized in Grafana.
 - Other metrics are delivered as views in CH (4 views for all 4 metrics except number 4).
 - Metric 4 could not be calculated because the archive does not have any info about gender.
-
-_What was not fully achieved and why:_
-- I was not able to fully implement the "Environments" section. However, hypothetically, in order to do that I would need to configure various docker-compose files and environments. For example, for prod env I would need to configure security and authorization more strictly. Give proper authorization to CH instance. And so on.
-- Testing. I did a very, very simple unit test, but surely it needs to be more proper with testing the dag loading, task flows and downstreams, etc. I had some troubles with libraries and modules for testing, that is why the project lacks proper testing now. But I keep that in mind and would have written proper tests if I had a little more time.
+- Few minor tests that can be run locally. They are by no means comprehensive, but they give a basis for further enhancements.
+- Different docker-compose files for different deployment environments. They might lack some detailed precise configurations, but they serve their purpose of varying configs for varying environments.
 
 # _Additional questions:_
 
@@ -43,12 +41,11 @@ There can only be one scheduler, though. As well as single metastore that all wo
 
 1. Create python virtual env and run `install-deps.sh` to install all libs and modules locally (for testing as an example)
 2. Install Docker and Docker Compose (I use DockerDesktop). Configure appropriate resources (6 CPUs and 8GB memory was not enough for me)
-3. Run `docker-compose up airflow-init` (not necessary but I do this anyway)
-4. Run `docker-compose up`
-5. Navigate to *localhost:8080*, login by *airflow/airflow*, then turn both DAGs on (they will execute in the right order by themselves)
-6. Access Clickhouse if you want to. Either by navigating to *http://localhost:8123/play* or via Datagrip (*localhost:8123*, empty user/password). Clickhouse would have a "raw" data table and few views that calculate metrics.
-7. Access Grafana by navigating to *localhost:3000/*. Use admin/admin. Use this guide to create a connection to our Clickhouse DB: _https://clickhouse.com/docs/en/connect-a-ui/grafana-and-clickhouse/_. Create a dashboard with the following query:
+3. Run `docker-compose -f docker-compose.<desired_environment>.yaml up`
+4. Navigate to *localhost:8080*, login by *airflow/airflow*, then turn both DAGs on (they will execute in the right order by themselves)
+5. Access Clickhouse if you want to. Either by navigating to *http://localhost:8123/play* or via Datagrip (*localhost:8123*, empty user/password for dev/stage). Clickhouse would have a "raw" data table and few views that calculate metrics.
+6. Access Grafana by navigating to *localhost:3000/*. Use admin/admin for prod, empty for dev/stage. Use this guide to create a connection to our Clickhouse DB: _https://clickhouse.com/docs/en/connect-a-ui/grafana-and-clickhouse/_. Create a dashboard with the following query:
 `select count(actor_id) as dev_number, events_date from github_data.devs_less_than_one_commit_daily
 group by events_date` to see Point 2 metric in real-time.
-8. Other exercise metrics are available as views in Clickhouse.
+7. Other exercise metrics are available as views in Clickhouse.
 
