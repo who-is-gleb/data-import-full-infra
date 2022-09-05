@@ -20,6 +20,9 @@ class GithubEvent:
         def get_possible_none_str(_dict: Dict, _key: str):
             return _dict.get(_key) if _dict.get(_key) is not None else ''
 
+        def get_possible_none_list(_dict: Dict, _key: str):
+            return _dict.get(_key) if _dict.get(_key) is not None else []
+
         self.id = event_dict['id']
         self.created_at = pendulum.parse(event_dict['created_at']).int_timestamp
         self.type = get_possible_none_str(event_dict, 'type')
@@ -27,7 +30,7 @@ class GithubEvent:
         self.repo_id = get_possible_none_int(event_dict.get('repo', {}), 'id')
         self.ref_type = get_possible_none_str(event_dict.get('payload', {}), 'ref_type')
         self.push_id = get_possible_none_int(event_dict.get('payload', {}), 'push_id')
-        self.commit_amount = len(event_dict.get('commits', []))
+        self.commit_amount = len(get_possible_none_list(event_dict.get('payload', {}), 'commits'))
 
     @staticmethod
     def get_ch_table_schema() -> Dict:

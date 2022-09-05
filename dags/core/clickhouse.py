@@ -1,11 +1,14 @@
 import logging
+import os
 import textwrap
 import typing
 from clickhouse_driver import Client
 
+ch_host = os.environ.get('CH_HOST')
+
 
 class ClickhouseLocalhost:
-    conn_id: str = 'clickhouse-localhost'
+    conn_id: str = ch_host
     port: int = 9000
     _client: Client = None
 

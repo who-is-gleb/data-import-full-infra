@@ -32,7 +32,7 @@ read it in other tasks using a given path to file.
 GITHUB_EVENT_TABLE_INFO = {
     'table_name': 'archive_events',
     'db_name': 'github_data',
-    'partition_by': 'created_at',
+    'partition_by': 'toYYYYMM(created_at)',
     'order_by': 'id'
 }
 

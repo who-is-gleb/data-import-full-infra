@@ -5,3 +5,4 @@ logs/
 clickhousedb_data/
 clickhousedb_logs/
 grafana-storage/
+tests/dags/.pytest_cache
