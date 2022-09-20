@@ -6,6 +6,13 @@ This is my own custom project that was done by myself. Originally, it was an exe
 ![Screen Shot 2022-09-05 at 1 19 06 AM](https://user-images.githubusercontent.com/49573287/188335583-495f8749-a1e9-424f-b0d4-7bd9e9d34fd9.png)
 Done with Figma
 
+# Project's goal:
+1. Fetch Github archive daily using Airflow
+2. Store raw data using Airflow and a connection Clickhouse
+3. Calculate various metrics (done as views in Clickhouse)
+4. Show some of the metrics in a real-time visualization tool (Grafana in this case)
+5. Prepare different project environments for docker-compose
+
 # How to start everything up, run, fetch the archive and so on:
 
 1. Create python virtual env and run `install-deps.sh` to install all libs and modules locally (for testing as an example)
@@ -15,6 +22,5 @@ Done with Figma
 5. Access Clickhouse if you want to. Either by navigating to *http://localhost:8123/play* or via Datagrip (*localhost:8123*, empty user/password for dev/stage). Clickhouse would have a "raw" data table and few views that calculate metrics
 6. Access Grafana by navigating to *localhost:3000/*. Use admin/admin for prod. Not needed for dev/stage. Use this guide to create a connection to our Clickhouse DB: _https://clickhouse.com/docs/en/connect-a-ui/grafana-and-clickhouse/_. Create a dashboard with the following query:
 `select count(actor_id) as dev_number, events_date from github_data.devs_less_than_one_commit_daily
-group by events_date` to see Point 2 metric in real-time
-7. Other exercise metrics are available as views in Clickhouse
-
+group by events_date` to see one of the metrics
+8. Views in Clickhouse store queries that basically calculate various metrics
