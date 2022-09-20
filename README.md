@@ -1,5 +1,6 @@
 # Quick note:
 This is my own custom project that was done by myself. Originally, it was an exercise for one of the interviews, but I decided to add it to my portfolio. Please feel free to ask any questions regarding the code.
+This application utilizes Airflow to fetch data via HTTP, Clickhouse to store data, and Grafana to visualize data.
 
 # Infrastructure schema: 
 
